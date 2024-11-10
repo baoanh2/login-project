@@ -1,0 +1,160 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&family=Slabo+13px&display=swap');
+:root {
+  
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: black;
+  background-color: whitesmoke;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;font-family: "Slabo 13px", serif;
+}
+.App{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+  height: 100vh;
+}
+.error-message{
+  color: red;
+  border: 1px solid ;
+  background-color: #ff9d9dbe;
+  font-size: 13px;
+}
+
+.register-box,.login-box{
+  border: 2px solid rgba(0, 0, 0, 0.308);
+  background-color: #a7421a65;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: auto;
+  width:25%;
+  border-radius: 10px;
+  padding: 20px;
+  color: rgba(255, 255, 255, 0.87);
+}
+h1{
+  font-weight: bolder;
+  font-size:50px;
+}
+input{
+  padding: 10px;
+  width: 100%;
+}
+label{
+  font-weight: bold;
+}
+#register-btn,#login-btn{
+  padding: 5px;
+  width: 150px;
+  background-color: #a7421a65;
+  font-weight: bold;
+  font-size: large;
+  border: none;
+  color: whitesmoke;
+}
+#register-btn{
+  width: 200px;
+}
+.login-box{
+  height:350px;
+}
+.login-box #link{
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+  color: white;
+  font-size:large;
+  margin: 10px 0;
+}
+.login-box #link:hover{
+  text-decoration: underline;
+}
+
+.register-box #link{
+  text-decoration: none;
+  text-align: center;
+  align-items: center;
+  color: white;
+  font-size:medium;
+  margin: 10px 0;
+}
+.register-box #link:hover{
+  text-decoration: underline;
+}
+
+.input-area{
+  width: 100%;
+}
+.input-password{
+  position: relative;
+}
+.eye-btn{
+  background-color: #a7421a00;
+  margin-top: 6px;
+  padding: 2px;
+  position: absolute;
+  border: none;
+  font-size: large;
+  color: white;
+}
+.eye-btn:hover{
+  color: rgb(224, 222, 222);
+  cursor: pointer;
+}
+@media (max-width:1200px){
+  .register-box h1{
+    font-size: 50px;
+  }
+  .register-box,.login-box{
+    width: 30%;
+  }
+}
+
+@media (max-width:1000px){
+  .register-box h1{
+    font-size: 40px;
+  }
+  .register-box,.login-box {
+    width: 40%;
+  }
+  .login-box #link{
+    font-size: small;
+  }
+}
+
+@media (max-width:700px){
+  .register-box h1{
+    font-size: 40px;
+  }
+  button{
+    width: 135px;font-size: medium;
+  }
+  .register-box ,.login-box{
+    width: 45%;
+  }
+}@media (max-width:400px){
+  .register-box h1{
+    font-size: 40px;
+  }
+  button{
+    width: 135px;font-size: medium;
+  }
+  .register-box ,.login-box{
+    width: 60%;
+  }
+}
+
+
