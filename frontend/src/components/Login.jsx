@@ -1,7 +1,7 @@
-import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "./LoginValidation";
+import axios from "axios";
 export default function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -9,30 +9,35 @@ export default function Login() {
   });
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
-  const [toggleIcon, setToggleIcon] = useState("bi bi-eye-slash");
+  const [showIcon, setShowIcon] = useState("bi bi-eye-slash");
+  const navigate = useNavigate();
+  axios.defaults.withCredentials = true;
   const toggleShowPassword = (e) => {
     setShowPassword(!showPassword);
-    setToggleIcon(showPassword ? "bi bi-eye-slash" : "bi bi-eye");
-    console.log(showPassword);
+    setShowIcon(showPassword ? "bi bi-eye" : "bi bi-eye-slash");
   };
-  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
   };
   const login = (e) => {
-    e.preventDefault();
     const newErrors = Validation(values);
     setErrors(newErrors);
     if (errors.email == "" && errors.password == "") {
-      axios.post("http://localhost:3001/login", values).then((res) => {
-        console.log(res);
-        if (res.data.length > 0) {
-          alert("Login Successful");
-          navigate("/home");
-        } else {
-          alert("No accounts founded");
-        }
-      });
+      axios
+        .post("http://localhost:3001/login", values)
+        .then((res) => {
+          console.log(res);
+          if (res.data.Status == "Success") {
+            alert("Login Success");
+            navigate("/");
+          } else {
+            alert(res.data.Error);
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   };
   return (
@@ -58,14 +63,14 @@ export default function Login() {
             <br></br>
             <input
               className="input-password"
-              type={showPassword == true ? "text" : "password"}
+              type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Enter password..."
               value={values.password}
               onChange={handleChange}
             ></input>
             <button className="eye-btn" onClick={toggleShowPassword}>
-              <i className={toggleIcon}></i>
+              <i className={showIcon}></i>
             </button>
             {errors.password && (
               <span className="error-message">{errors.password}</span>
