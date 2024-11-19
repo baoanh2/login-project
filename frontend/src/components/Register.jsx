@@ -1,5 +1,5 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "./RegisterValidation";
 import axios from "axios";
@@ -38,7 +38,6 @@ export default function Register() {
       })
       .then((res) => {
         if (res.data.Status == "Success") {
-          console.log(role);
           alert("Register Success!!");
           navigate("/login");
         } else {
@@ -63,7 +62,7 @@ export default function Register() {
       errors.key == "" &&
       role == "admin"
     ) {
-      register("admin");
+      register();
     } else if (
       errors.fullName == "" &&
       errors.email == "" &&
