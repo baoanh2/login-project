@@ -111,7 +111,10 @@ label{
   width: 100%;
   margin-right: 9px;
 }
-.input-email{
+.checkbox-admin{
+  margin: 5px 0 5px 0;
+}
+.input-email,.input-name,.input-secret-key{
   width: 100%;
   padding: 10px;
 }

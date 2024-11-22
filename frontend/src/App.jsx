@@ -1,12 +1,12 @@
 import "./index.css";
-import Login from "./components/Login";
-import HomeScreen from "./components/Pages/HomeScreen";
-import Register from "./components/Register";
+import Login from "./Pages/Login/Login";
+import HomeScreen from "./Pages/Home/HomeScreen";
+import Register from "./Pages/Register/Register";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import HotelDetails from "./components/Pages/HotelDetailsScreen";
-import UpdateRoom from "./components/Pages/Admin/UpdateRoom";
-import Booking from "./components/Pages/Booking";
-import Navbar from "./components/Pages/Navbar";
+import HotelDetails from "./Pages/User/HotelDetailsScreen";
+import UpdateRoom from "./Pages/Admin/UpdateRoom";
+import Booking from "./Pages/User/Booking";
+import Navbar from "./Pages/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
