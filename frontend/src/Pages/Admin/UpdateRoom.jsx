@@ -13,9 +13,6 @@ export default function UpdateRoom() {
     description: "",
   });
   const navigate = useNavigate();
-  const handleChange = (e) => {
-    setValues((prev) => ({ ...prev, [e.target.name]: [e.target.value] }));
-  };
 
   useEffect(() => {
     axios
@@ -38,16 +35,32 @@ export default function UpdateRoom() {
 
   const UpdateRoom = (e) => {
     e.preventDefault();
-    axios
-      .put("http://localhost:3001/update-hotel/" + id, values)
-      .then((res) => {
-        alert("Update Success!!");
-        navigate("/");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      values.name == "" ||
+      values.capacity == 0 ||
+      values.phone == 0 ||
+      values.rent == 0 ||
+      values.image == "" ||
+      values.type == "" ||
+      values.description == ""
+    ) {
+      alert("Please fill in all the field below!!!");
+    } else {
+      axios
+        .put("http://localhost:3001/update-hotel/" + id, values)
+        .then((res) => {
+          if (res.data.Status === "Success") {
+            alert("Update Success!!");
+            navigate("/");
+            console.log(res);
+          } else {
+            alert("Update error");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   return (
@@ -59,10 +72,11 @@ export default function UpdateRoom() {
               <div className="title">Update Hotel</div>
               <label htmlFor="name">Hotel name:</label>
               <input
+                type="text"
                 name="name"
                 placeholder="Enter hotel name..."
                 value={values.name}
-                onChange={handleChange}
+                onChange={(e) => setValues({ ...values, name: e.target.value })}
                 className="input-addroom"
               />
             </div>
@@ -73,7 +87,9 @@ export default function UpdateRoom() {
                 name="capacity"
                 placeholder="Enter capacity..."
                 value={values.capacity}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setValues({ ...values, capacity: e.target.value })
+                }
                 className="input-addroom"
               />
             </div>
@@ -84,7 +100,9 @@ export default function UpdateRoom() {
                 name="phone"
                 placeholder="Enter phone number..."
                 value={values.phone}
-                onChange={handleChange}
+                onChange={(e) =>
+                  setValues({ ...values, phone: e.target.value })
+                }
                 className="input-addroom"
               />
             </div>
@@ -95,7 +113,7 @@ export default function UpdateRoom() {
                 value={values.type}
                 className="type-select"
                 name="type"
-                onChange={handleChange}
+                onChange={(e) => setValues({ ...values, type: e.target.value })}
               >
                 <option value="Non-Deluxe">Non-Deluxe</option>
                 <option value="Deluxe">Deluxe</option>
@@ -106,8 +124,10 @@ export default function UpdateRoom() {
               <input
                 name="image"
                 placeholder="Enter url image..."
-                onChange={handleChange}
                 value={values.image}
+                onChange={(e) =>
+                  setValues({ ...values, image: e.target.value })
+                }
                 className="input-addroom"
                 rows={10}
               />
@@ -118,11 +138,13 @@ export default function UpdateRoom() {
                 name="description"
                 placeholder="Enter description..."
                 value={values.description}
+                onChange={(e) =>
+                  setValues({ ...values, description: e.target.value })
+                }
                 className="input-addroom"
                 id="update-textarea"
                 rows={7}
                 cols={60}
-                onChange={handleChange}
               />
             </div>
             <button type="submit" id="updateroom-btn">

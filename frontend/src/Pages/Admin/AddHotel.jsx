@@ -18,20 +18,32 @@ export default function AddRoom() {
   };
 
   const addRoom = () => {
-    axios
-      .post("http://localhost:3001/addroom", values)
-      .then((res) => {
-        if (res.data.Status === "Insert Success") {
-          navigate("/");
-          alert("Add Success!!");
-          console.log(res);
-        } else {
-          alert("ADD ERROR!!");
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    if (
+      values.name == "" ||
+      values.capacity == 0 ||
+      values.phone == 0 ||
+      values.rent == 0 ||
+      values.image == "" ||
+      values.type == "" ||
+      values.description == ""
+    ) {
+      alert("Please fill in all the field below!!!");
+    } else {
+      axios
+        .post("http://localhost:3001/addroom", values)
+        .then((res) => {
+          if (res.data.Status === "Success") {
+            navigate("/");
+            alert("Add Success!!");
+            console.log(res);
+          } else {
+            alert("ADD ERROR!!");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
   return (
     <>

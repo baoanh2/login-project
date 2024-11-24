@@ -10,6 +10,7 @@ import {
   Paper,
 } from "@mui/material";
 import axios from "axios";
+import DeletePopup from "./DeletePopup";
 export default function Hotels() {
   const { id } = useParams();
   const [data, setData] = useState([]);
@@ -34,55 +35,59 @@ export default function Hotels() {
       });
   };
   return (
-    <TableContainer
-      component={Paper}
-      className="hotel-list-container"
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        flexDirection: "column",
-      }}
-    >
-      <h1 style={{ textAlign: "center" }}>Hotel List</h1>
-      <Table aria-label="simple table" style={{ width: "90%" }}>
-        <TableHead>
-          <TableRow>
-            <TableCell>Name</TableCell>
-            <TableCell>Capacity</TableCell>
-            <TableCell>Phone number</TableCell>
-            <TableCell>Type</TableCell>
-            <TableCell>Image</TableCell>
-            <TableCell>Description</TableCell>
-            <TableCell>Action</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell>{row.capacity}</TableCell>
-              <TableCell>{row.phonenumber}</TableCell>
-              <TableCell>{row.type}</TableCell>
-              <TableCell>{row.image}</TableCell>
-              <TableCell style={{ minWidth: "25rem" }}>
-                {row.description}
-              </TableCell>
-              <TableCell>
-                <Link to={`/update-hotel/${row.id}`} id="update-btn">
-                  Update
-                </Link>
-                <br />
-                <br />
-                <button onClick={(e) => deleteHotel(row.id)} id="delete-btn">
-                  Delete
-                </button>
-              </TableCell>
+    <>
+      <TableContainer
+        component={Paper}
+        className="hotel-list-container"
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <h1 style={{ textAlign: "center" }}>Hotel List</h1>
+        <Table aria-label="simple table" style={{ width: "90%" }}>
+          <TableHead>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>Capacity</TableCell>
+              <TableCell>Phone number</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Image</TableCell>
+              <TableCell>Description</TableCell>
+              <TableCell>Action</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+          </TableHead>
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.id}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell>{row.capacity}</TableCell>
+                <TableCell>{row.phonenumber}</TableCell>
+                <TableCell>{row.type}</TableCell>
+                <TableCell style={{ minWidth: "10rem" }}>{row.image}</TableCell>
+                <TableCell style={{ minWidth: "25rem" }}>
+                  {row.description}
+                </TableCell>
+                <TableCell>
+                  <Link to={`/update-hotel/${row.id}`} id="update-btn">
+                    Update
+                  </Link>
+                  <br />
+                  <br />
+                  <DeletePopup
+                    name={row.name}
+                    id={row.id}
+                    deleteHotel={deleteHotel}
+                  />
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </>
   );
 }

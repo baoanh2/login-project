@@ -1,8 +1,9 @@
-const mysql = require('mysql2')
+
+const cookieParser = require('cookie-parser');
 const express = require('express')
 const cors = require('cors')
+const mysql = require('mysql2')
 const bcrypt = require('bcrypt');
-const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken')
 const salt = 10;
 require('dotenv').config();
@@ -37,8 +38,10 @@ const verifyUser=(req,res,next)=>{
         if (err) {
             return res.json({Error:"Your token is not correct"})
         }else{
-            req.role = decoded.role;
+            req.id = decoded.id;
             req.name = decoded.name;
+            req.email = decoded.email;
+            req.role = decoded.role;
             next();
         }
 
@@ -48,8 +51,15 @@ const verifyUser=(req,res,next)=>{
 }
 
 app.get('/',verifyUser,(req,res)=>{
-    return res.json({Status:"Success",role:req.role,name:req.name})
-    
+    return res.json({Status:"Success",id:req.id,name:req.name,email:req.email,role:req.role})
+})
+app.get('/user/:id',(req,res)=>{
+    const sql ="SELECT * FROM `userrole` WHERE id=? ";
+    const id = req.params.id;
+    db.query(sql,id,(err,data)=>{
+        if(err) return res.json({Error: "Error in get user",err});
+        return res.json(data);
+    })
 })
 app.post('/register',(req,res)=>{
     const fullname = req.body.fullName;
@@ -73,9 +83,11 @@ app.post('/login',(req,res)=>{
             bcrypt.compare(req.body.password.toString(),data[0].password,(err,response)=>{
                 if(err) return res.json({Error:"Password compare error"});
                 if(response) {
-                    const role = data[0].role;
+                    const id = data[0].id;
                     const name = data[0].fullname;
-                    const token = jwt.sign({role,name},"jwt-secret-key",{expiresIn:"1d"});
+                    const email = data[0].email;
+                    const role = data[0].role;
+                    const token = jwt.sign({id,name,email,role},"jwt-secret-key",{expiresIn:"1d"});
                     res.cookie('token',token);
                     return res.json({Status:"Success"});
                 }else{
@@ -126,6 +138,14 @@ app.get('/gethotel/:id',(req,res)=>{
         return res.send(data);
     })
 })
+app.get('/getUserBooking/:userid',(req,res)=>{
+    const userid=req.params.userid;
+    const sql = "SELECT * FROM `booking-list` WHERE userid=?";
+    db.query(sql,[userid],(err,data)=>{
+        if(err) res.json({Error: "Error in getting booking data"});
+        return res.send(data);
+    })
+})
 
 app.get('/getAllBooking',(req,res)=>{
     const sql = "SELECT * FROM `booking-list`";
@@ -146,8 +166,23 @@ app.put('/update-hotel/:id',(req,res)=>{
     const values = [name,capacity,phone,type,image,description,id]
     const sql = 'UPDATE `hotel-info` SET name=?,capacity=?,phonenumber=?,type=?,image=?,description=? WHERE (id=?)';
     db.query(sql,values,(err,result)=>{
-        if (err) console.log(err);
-        return res.json({Status:"Success"})
+        if (err) {
+            return res.json({Error:"Error in update hotel data"});
+        }
+        else{
+            return res.json({Status:"Success"});
+        };
+        
+    })
+})
+app.put('/cancel-booking/:id',(req,res)=>{
+    const id = req.params.id;
+    const status = "Cancel";
+    const values = [status,id]
+    const sql = 'UPDATE `booking-list` SET status=? WHERE (bookid=?)';
+    db.query(sql,values,(err,result)=>{
+        if (err) {return res.json({Error:"Error in cancel booking"});}
+        return res.json({Status:"Cancel Success"});
     })
 })
 
@@ -177,13 +212,14 @@ app.post('/addroom',(req,res)=>{
 })
 
 app.post('/booking',(req,res)=>{
+    const userid = req.body.userid;
     const startDate = req.body.startDate;
     const endDate = req.body.endDate;
     const totalMoney = req.body.totalMoney;
     const totalday = req.body.day;
     const status = "Success";
-    const values = [startDate,endDate,totalday,totalMoney,status]
-    const sql = 'INSERT INTO `booking-list` (startdate,enddate,totalday,totalamount,status) VALUES (?,?,?,?,?)';
+    const values = [userid,startDate,endDate,totalday,totalMoney,status]
+    const sql = 'INSERT INTO `booking-list` (userid,startdate,enddate,totalday,totalamount,status) VALUES (?,?,?,?,?,?)';
     db.query(sql,values,(err,result)=>{
         if (err) res.json({Error: "Error in insert to database"});
         return res.json({Status:"Success"})

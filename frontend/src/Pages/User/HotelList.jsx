@@ -1,9 +1,7 @@
 import axios from "axios";
 import React, { useEffect, useState, CSSProperties } from "react";
 import { Link } from "react-router-dom";
-import Booking from "./Booking";
 import ClockLoader from "react-spinners/ClockLoader";
-import { Button, Modal } from "react-bootstrap";
 
 export default function ListOfHotel() {
   const [data, setData] = useState([]);

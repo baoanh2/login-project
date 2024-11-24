@@ -281,6 +281,42 @@
   justify-content: center;
   align-items: center;
 }
+.user-panel{
+  width: 100%;
+  height: 100vh;
+}
+.user-nav{
+  float: left;
+  width: 100%;
+  margin-bottom: 2rem;
+  margin-top: 5rem;
+}
+.user-panel-btn{
+  border: none;
+  background-color: white;
+  margin-left: 20px;
+  font-size: large;
+  font-weight: 500;
+}
+.user-body{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+.user-panel-btn:hover{
+  border-bottom: 5px solid #a7421a65;
+}
+.profile-container{
+  margin-left: 5rem;
+  width: 100%;
+}
+.profile-box{
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  box-shadow: 2px 2px 5px black;
+  width: 40%;
+  padding: 10px 20px;
+}
 @media (max-width:1200px){
   .info-container{
     width: 23rem;
