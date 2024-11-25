@@ -35,7 +35,12 @@ export default function UserPanel() {
               className="user-panel-btn"
               value="book-list"
               onClick={returnHome}
-              style={{ float: "right", marginRight: "2rem" }}
+              style={{
+                float: "right",
+                marginRight: "2rem",
+                color: "blue",
+                borderBottomColor: "darkblue",
+              }}
             >
               Return Home
             </button>

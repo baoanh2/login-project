@@ -53,7 +53,7 @@ export default function Login() {
             value={values.email}
             placeholder="Enter email..."
             onChange={handleChange}
-          ></input>
+          />
           {errors.email && (
             <span className="error-message">{errors.email}</span>
           )}
@@ -69,7 +69,7 @@ export default function Login() {
             placeholder="Enter password..."
             value={values.password}
             onChange={handleChange}
-          ></input>
+          />
           <button className="eye-btn" onClick={toggleShowPassword}>
             <i className={showIcon}></i>
           </button>
@@ -78,6 +78,7 @@ export default function Login() {
           )}
         </div>
       </div>
+      {console.log(errors.password)}
       <Link id="link" to="/register">
         Doesn't have an account yet?
       </Link>

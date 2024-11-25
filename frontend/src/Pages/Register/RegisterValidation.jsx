@@ -7,7 +7,7 @@ const Validation = (values) => {
 
   if (values.key == "") {
     errors.key = "Secret key is required";
-  } else if (values.key.toString() !== import.meta.env.VITE_REACT_API_KEY) {
+  } else if (values.key.toString() !== import.meta.env.VITE_REACT_ADMIN_KEY) {
     errors.key = "Secret key is invalid";
   } else {
     errors.key = "";
@@ -36,7 +36,7 @@ const Validation = (values) => {
     errors.password = "Password is required";
   } else if (!passRegex.test(values.password)) {
     errors.password =
-      "Must contains uppercase, lowercase, number, special char, at least 8 char";
+      "Must contains uppercase, lowercase, number, special char and at least 8 char";
   } else if (
     values.confPassword &&
     values.confPassword.toString() !== values.password.toString()

@@ -70,7 +70,6 @@ export default function Register() {
       errors.confPassword == "" &&
       role == "user"
     ) {
-      console.log(role);
       register();
     }
   };
@@ -85,6 +84,7 @@ export default function Register() {
           <div className="checkbox-admin">
             <label>
               <input
+                style={{ cursor: "pointer", padding: "2px" }}
                 type="checkbox"
                 name="admin"
                 value="admin"
@@ -97,6 +97,7 @@ export default function Register() {
           <div className="checkbox-admin">
             <label>
               <input
+                style={{ cursor: "pointer", padding: "2px" }}
                 name="user"
                 value="user"
                 type="checkbox"
@@ -118,7 +119,7 @@ export default function Register() {
               className="input-secret-key"
               value={values.key}
               onChange={handleChange}
-            ></input>
+            />
             {errors.key && <div className="error-message">{errors.key}</div>}
           </div>
         )}
@@ -132,7 +133,7 @@ export default function Register() {
             placeholder="Enter name..."
             onChange={handleChange}
             value={values.fullName}
-          ></input>
+          />
           {errors.fullName && (
             <div className="error-message">{errors.fullName}</div>
           )}
@@ -147,7 +148,7 @@ export default function Register() {
             placeholder="Enter email..."
             value={values.email}
             onChange={handleChange}
-          ></input>
+          />
           {errors.email && <div className="error-message">{errors.email}</div>}
         </div>
         {/* Password Input */}
@@ -161,7 +162,7 @@ export default function Register() {
             placeholder="Enter password..."
             value={values.password}
             onChange={handleChange}
-          ></input>
+          />
           <button className="eye-btn" onClick={toggleShowPassword}>
             <i className={showIcon}></i>
           </button>
@@ -180,7 +181,7 @@ export default function Register() {
             value={values.confPassword}
             placeholder="Enter confirm password..."
             onChange={handleChange}
-          ></input>
+          />
           <button className="eye-btn" onClick={toggleShowPassword}>
             <i className={showIcon}></i>
           </button>

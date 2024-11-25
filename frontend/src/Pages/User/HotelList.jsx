@@ -68,7 +68,7 @@ export default function ListOfHotel() {
                       </li>
                       <li>
                         <span style={{ fontWeight: "bold" }}>
-                          Phone number:{" "}
+                          Phone number:
                         </span>
                         {d.phonenumber}
                       </li>

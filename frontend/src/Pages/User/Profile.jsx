@@ -1,6 +1,4 @@
-import axios from "axios";
 import React from "react";
-import { Link } from "react-router-dom";
 
 export default function Profile() {
   const name = localStorage.getItem("name");
@@ -29,7 +27,6 @@ export default function Profile() {
             <span style={{ fontWeight: "600" }}>Admin Access: </span>
             {role == "user" ? "None" : "Yes"}
           </p>
-          <Link to="/">Return Home</Link>
         </div>
       </div>
     </>
