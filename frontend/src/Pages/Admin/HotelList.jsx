@@ -21,7 +21,7 @@ export default function Hotels() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   const deleteHotel = (id) => {
     axios

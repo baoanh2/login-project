@@ -31,7 +31,7 @@ export default function UpdateRoom() {
       .catch((err) => {
         console.log(err);
       });
-  });
+  }, []);
 
   const UpdateRoom = (e) => {
     e.preventDefault();
@@ -52,6 +52,7 @@ export default function UpdateRoom() {
           if (res.data.Status === "Success") {
             alert("Update Success!!");
             navigate("/");
+            location.reload();
             console.log(res);
           } else {
             alert("Update error");

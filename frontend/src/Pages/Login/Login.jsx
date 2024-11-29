@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Validation from "./LoginValidation";
 import axios from "axios";
+import LoginController from "./LoginController";
+
 export default function Login() {
   const [values, setValues] = useState({
     email: "",
@@ -78,7 +80,6 @@ export default function Login() {
           )}
         </div>
       </div>
-      {console.log(errors.password)}
       <Link id="link" to="/register">
         Doesn't have an account yet?
       </Link>

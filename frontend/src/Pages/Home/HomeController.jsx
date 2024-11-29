@@ -26,7 +26,6 @@ export default function HomeController() {
           localStorage.setItem("name", res.data.name);
           localStorage.setItem("email", res.data.email);
           localStorage.setItem("role", res.data.role);
-          console.log(res.data);
         } else {
           setAuth(false);
           setMessage(res.data.Error);

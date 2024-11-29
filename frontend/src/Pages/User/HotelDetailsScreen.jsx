@@ -10,7 +10,7 @@ export default function HotelDetails() {
   let [color, setColor] = useState("#a7421a99");
   useEffect(() => {
     axios
-      .get("http://localhost:3001/getdetail/" + id)
+      .get("http://localhost:3001/gethotel/" + id)
       .then((res) => {
         setLoading(true);
         setTimeout(() => {

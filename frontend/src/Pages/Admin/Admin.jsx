@@ -5,6 +5,7 @@ import UsersList from "./UsersList";
 import HotelList from "./HotelList";
 import BookingList from "./BookingList";
 import ClockLoader from "react-spinners/ClockLoader";
+import BookingController from "./BookingController";
 
 export default function Admin() {
   const [clicked, setClicked] = useState("booking");

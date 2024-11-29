@@ -50,7 +50,7 @@ export default function Booking() {
   const booking = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:3001/booking/", {
+      .post("http://localhost:3001/addBooking/", {
         userid: localStorage.getItem("userid"),
         startDate: moment(startDate).format("DD/MM/YYYY"),
         endDate: moment(endDate).format("DD/MM/YYYY"),
